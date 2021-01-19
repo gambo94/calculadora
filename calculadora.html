@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Calculator</title>
+</head>
+<style>
+    
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+ 
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+ 
+.calculator {
+  border: 4px groove #ccc;
+  border-radius: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+ 
+.output-screen {
+  width: 100%;
+  font-size: 5rem;
+  height: 80px;
+  border: none;
+  background-color: rgb(0, 0, 0);
+  color: #fff;
+  text-align: right;
+  padding-right: 20px;
+  padding-left: 10px;
+}
+ 
+button {
+  height: 60px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #c4c4c4;
+  background-color: transparent;
+  font-size: 2rem;
+  color: #333;
+  background-image: linear-gradient(to bottom,transparent,transparent 50%,rgba(0,0,0,.04));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset 0 1px 0 0 rgba(255,255,255,.45), inset 0 -1px 0 0 rgba(255,255,255,.15), 0 1px 0 0 rgba(255,255,255,.15);
+  text-shadow: 0 1px rgba(255,255,255,.4);
+}
+ 
+button:hover {
+  background-color: #eaeaea;
+}
+ 
+.operator {
+  color: #337cac;
+}
+ 
+.clear-value {
+  background-color: green;
+  border-color: #b0353a;
+  color: #fff;
+}
+ 
+.clear-value:hover {
+  background-color: #024d08;
+}
+ 
+.calculate-value {
+  background-color: rgb(255, 123, 0);
+  border-color: #337cac;
+  color: #fff;
+  height: 100%;
+  grid-area: 2 / 4 / 6 / 5;
+}
+ 
+.calculate-value:hover {
+  background-color: #c74900;
+}
+ 
+.display-keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  padding: 20px;
+}
+</style>
+<body>
+    <div class="calculator">
+<h1 style="text-align: center;">Calculator</h1>
+        <input type="text" class="output-screen" value="" disabled />
+        
+        <div class="display-keys">
+          
+          <button  class="operator" value="+">+</button>
+          <button  class="operator" value="-">-</button>
+          <button  class="operator" value="*">&times;</button>
+          <button  class="operator" value="/">&divide;</button>
+      
+          <button  class="num" value="7">7</button>
+          <button  class="num" value="8">8</button>
+          <button  class="num" value="9">9</button>
+      
+      
+          <button  class="num" value="4">4</button>
+          <button  class="num" value="5">5</button>
+          <button  class="num" value="6">6</button>
+      
+      
+          <button  class="num" value="1">1</button>
+          <button  class="num" value="2">2</button>
+          <button  class="num" value="3">3</button>
+      
+      
+          <button  class="num" value="0">0</button>
+          <button  class="num decimal" value=".">.</button>
+          <button  class="clear-value" value="clear-value">AC</button>
+      
+          <button  class="calculate-value" value="=">=</button>
+      
+        </div>
+      </div>
+</body>
+<script>
+
+
+let output;
+let display = document.getElementsByClassName('output-screen')[0];
+
+ 
+// select and activate all number buttons
+
+const numButtons = document.querySelectorAll('.num');
+numButtons.forEach(button => button.addEventListener('click', function(){
+    //displaying the number on screen
+    display.value += button.value;
+
+}));
+
+// activate clear button
+
+let clear = document.querySelector('.clear-value');
+clear.addEventListener('click', () => display.value= '')
+
+// activate all operator buttons
+const opButtons = document.querySelectorAll('.operator');
+opButtons.forEach(button => button.addEventListener('click', function(){
+    //displaying the operator on screen
+    if (display.value !== '') {
+        display.value += button.value;
+    }
+}));
+
+// creating calculation button (equal sign) that calculates result
+const calculateButton = document.querySelector('.calculate-value');
+calculateButton.addEventListener('click', function(){
+    display.value = (eval(display.value));
+});
+ 
+</script>
+</html>
